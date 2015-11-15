@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width">
+  <script src="https://code.jquery.com/pep/0.4.0/pep.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <style>
+    .pixel {
+      position: absolute;
+      background: black;
+      width: 2px;
+      height: 2px;
+    }
+
+    #canvas {
+      margin: 20px;
+      background: white;
+      border: 1px solid black;
+      height: 200px;
+    }
+
+    table {
+      table-layout: fixed;
+    }
+  </style>
+  <meta charset="utf-8">
+  <title>Pointer Events</title>
+</head>
+
+<body>
+<h1>Pointer Events</h1>
+<div id="canvas" touch-action="none"></div>
+  <table>
+    <tr>
+      <td></td>
+    </tr>
+    <tr id="mouse">
+    </tr>
+    <tr id="pointer">
+    </tr>
+    <tr id="touch">
+    </tr>
+  </table>
+  <script src="scripts/pointerevents.js"></script>
+</body>
+</html>
