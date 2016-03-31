@@ -1,0 +1,32 @@
+<html>
+    <head>
+  <script src="../../dist/pep.js"></script>
+    </head>
+    <body>
+        <div id="div-iframe1" touch-action="none" style="background:yellow;height:100px;">
+            iFrame1
+        </div>
+<script>
+var divs = document.querySelectorAll('div');
+var logIt = function(e) { 
+    var relatedId = e.relatedTarget && e.relatedTarget.id;
+    console.log('iframe1:' + [e.type, e.target.id, relatedId].join(' - ')); 
+};
+
+[
+  'mouseenter',
+  'mouseleave',
+  'pointerenter',
+  'pointerleave',
+  'pointerover',
+  'pointerout',
+  'touchstart',
+  'touchmove'
+].forEach(function(type) {
+  [].forEach.call(divs, function(element) {
+    element.addEventListener(type, logIt, false);
+  });
+});
+</script>
+</body>
+</html>
