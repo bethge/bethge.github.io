@@ -1,32 +1,35 @@
+<CTYPE html>
 <html>
-    <head>
-  <script src="../../dist/pep.js"></script>
-    </head>
-    <body>
-        <div id="div-iframe0" touch-action="none" style="background:yellow;height:100px;">
-            iFrame0
-        </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
+</head>
+<body>
+  <div id="div-iframe0" touch-action="none" style="background:yellow;height:100px;">
+    iFrame0
+  </div>
+
 <script>
-var divs = document.querySelectorAll('div');
+var iframeDiv = document.querySelector('#div-iframe0');
 var logIt = function(e) { 
     var relatedId = e.relatedTarget && e.relatedTarget.id;
-    console.log('iframe0:' + [e.type, e.target.id, relatedId].join(' - ')); 
+    console.log(['[IFRAME0] ' + e.type, 'target: ' + e.target.id, 'relatedTarget: ' + relatedId].join(' - ')); 
 };
-
 [
-  'mouseenter',
-  'mouseleave',
   'pointerenter',
   'pointerleave',
   'pointerover',
   'pointerout',
-  'touchstart',
   'touchmove'
 ].forEach(function(type) {
-  [].forEach.call(divs, function(element) {
-    element.addEventListener(type, logIt, false);
-  });
+  iframeDiv.addEventListener(type, function(e) {
+    if (type === 'pointerenter') iframeDiv.style.background = "red";
+    if (type === 'pointerleave') iframeDiv.style.background = "yellow";
+    logIt(e);
+  }, false);
 });
 </script>
 </body>
 </html>
+
