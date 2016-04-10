@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./pep.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    div {
+      height: 30px;
+      width: 30px;
+    }
+    #topa { background:red }
+    #topb { background:blue }
+  </style>
+</head>
+<body>
+  Move the cursor from the red box into the blue box.
+</body>
+<script>
+function appendStack(n, c) {
+  var base = document.body;
+  for (var i = 0; i < n; i++) {
+    var node = document.createElement('div');
+    base.appendChild(node);
+    node.setAttribute('class', c);
+    base = node;
+  }
+  base.setAttribute('id', 'top'+c);
+  return base;
+}
+
+var topa = appendStack(1, 'a');
+var topb = appendStack(1, 'b');
+
+// var time;
+// var avg = 0;
+// var count = 0;
+// topa.addEventListener('pointerleave', function(e) {
+//   time = Date.now();
+// });
+
+// topb.addEventListener('pointerenter', function(e) {
+//   if (e.relatedTarget !== topa) return;
+//   time = Date.now() - time;
+//   avg = (avg * count + time)/ (count+1);
+//   count++;
+//   console.log('Time:' + time);
+//   console.log('Avg:' + avg);
+// });
+</script>
+
+</html>
