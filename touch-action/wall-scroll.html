@@ -5,7 +5,7 @@
     <!-- <script src="/pep-master.js"></script> -->
     <style>
       .box {
-        width: 200px;
+        width: 300px;
         height: 30px;
         border: 2px solid black;
         padding: 20px;
@@ -22,9 +22,9 @@
     </style>
   </head>
   <body>
-    <div class ="box" id="auto">auto</div>
-    <div class ="box" id="pan-x">pan-x</div>
-    <div class ="box" id="pan-x">pan-x with scrollable content<div class="needs-scroll"></div></div>
+    <div class ="box" id="auto">touch-action: auto</div>
+    <div class ="box" id="pan-x">touch-action: pan-x</div>
+    <div class ="box" id="pan-x">touch-action: pan-x with scrollable content<div class="needs-scroll"></div></div>
     <div>touch-action supported: <span id="touchActionSupported">&#x2716</span></div>
     <div>Pointer events supported: <span id="pointereventsSupported">&#x2716</span></div>
     <p>Check the developer console for events ... !</p>
