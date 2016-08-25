@@ -22,7 +22,23 @@
         border-radius: 4px;
       }
     </style>
+  </head>
+  <body>
+    <div id="outer" touch-action="none">
+      <div id="inner" touch-action="auto">
+      </div>
+    </div>
+    <div>Native supported: <span id="nativeIsSupported">&#x2716</span></div>
+    <div>Native active: <span id="nativeIsActive">&#x2716</span></div>
+    <button name="toggleTouchAction">Toggle Native Touch Action</button>
     <script>
+      var div = document.createElement('div');
+      div.style.setProperty('touch-action', 'none');
+      var supported = div.style.getPropertyValue('touch-action') === 'none';
+      if (supported) {
+        document.querySelector('#nativeIsSupported').innerHTML = '&#x2714';
+      }        
+
       var nativeActive = false;
       document.addEventListener('click', function(e) {
         if (e.target.name === 'toggleTouchAction') {
@@ -43,13 +59,5 @@
         nativeActive = !nativeActive;
       }
     </script>
-  </head>
-  <body>
-    <div id="outer" touch-action="none">
-      <div id="inner" touch-action="auto">
-      </div>
-    </div>
-    <div>Native active: <span id="nativeIsActive">&#x2716</span></div>
-    <button name="toggleTouchAction">Toggle Native Touch Action</button>
   </body>
 </html>
