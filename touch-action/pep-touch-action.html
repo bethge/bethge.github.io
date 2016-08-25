@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/pep-master.js"></script>
+    <style>
+      #outer {
+        width: 200px;
+        height: 200px;
+        border: 2px solid black;
+        padding: 20px;
+        overflow: scroll;
+      }
+      #inner {
+        width: 300px;
+        height: 300px;
+        background: green;
+      }
+      button {
+        margin: 30px;
+        border: 1px solid black;
+        border-radius: 4px;
+      }
+    </style>
+    <script>
+      var nativeActive = false;
+      document.addEventListener('click', function(e) {
+        if (e.target.name === 'toggleTouchAction') {
+          toggleNativeTouchAction();
+        }
+      });
+
+      function toggleNativeTouchAction() {
+        if (!nativeActive) {
+          document.querySelector('#outer').style['touch-action'] = 'none';
+          document.querySelector('#inner').style['touch-action'] = 'auto';
+          document.querySelector('#nativeIsActive').innerHTML = '&#x2714';
+        } else {
+          document.querySelector('#outer').style['touch-action'] = '';
+          document.querySelector('#inner').style['touch-action'] = '';
+          document.querySelector('#nativeIsActive').innerHTML = '&#x2716';
+        }
+        nativeActive = !nativeActive;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="outer" touch-action="none">
+      <div id="inner" touch-action="auto">
+      </div>
+    </div>
+    <div>Native active: <span id="nativeIsActive">&#x2716</span></div>
+    <button name="toggleTouchAction">Toggle Native Touch Action</button>
+  </body>
+</html>
