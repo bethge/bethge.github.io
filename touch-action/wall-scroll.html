@@ -11,8 +11,14 @@
         padding: 20px;
         overflow: scroll;
       }
+      #auto {
+        touch-action: auto;
+      }
       #pan-x {
         touch-action: pan-x;
+      }
+      #none {
+        touch-action: none;
       }
       .needs-scroll {
         width: 400px;
@@ -23,13 +29,40 @@
   </head>
   <body>
     <div class ="box" id="auto">touch-action: auto</div>
+    <div class ="box" id="auto">touch-action: auto with scrollable content<div class="needs-scroll"></div></div>
     <div class ="box" id="pan-x">touch-action: pan-x</div>
     <div class ="box" id="pan-x">touch-action: pan-x with scrollable content<div class="needs-scroll"></div></div>
+    <div class ="box" id="none">none</div>
     <div>touch-action supported: <span id="touchActionSupported">&#x2716</span></div>
     <div>Pointer events supported: <span id="pointereventsSupported">&#x2716</span></div>
     <p>Check the developer console for events ... !</p>
     <script>
-      // Check touch-action support.
+      // Attach Listeners
+      function logTouchMove(e) {
+        if (e.cancelable) {
+          console.log('Touchmove: ' + parseInt(e.timeStamp) + 'ms - cancelable: ' + e.cancelable);
+        } else {
+          console.log('%cTouchmove: ' + parseInt(e.timeStamp) + 'ms - cancelable: ' + e.cancelable, 'color: red');
+        }
+      }
+
+      document.addEventListener('touchmove', throttle(logTouchMove), {passive: true});
+      document.addEventListener('pointermove', function(e) {console.log('Pointermove: ' + parseInt(e.timeStamp)) + 'ms'});
+      document.addEventListener('pointercancel', function(e) {console.log('%cPointercancel: ' + parseInt(e.timeStamp) + 'ms', 'color:purple')});
+
+      // Throttle given function to execute once every 300ms.
+      var last = 0;
+      function throttle(fn) {
+        return function(e) {
+          var now = Date.now();
+          if (now - last > 300) {
+            last = now;
+            fn(e);
+          }
+        };
+      }
+
+      // Check for touch-action support.
       var div = document.createElement('div');
       div.style.setProperty('touch-action', 'none');
       var supported = div.style.getPropertyValue('touch-action') === 'none';
@@ -37,25 +70,11 @@
         document.querySelector('#touchActionSupported').innerHTML = '&#x2714';
       }
 
-      // Check pointer events support.
+      // Check for pointer events support.
       if (window.PointerEvent) {
         document.querySelector('#pointereventsSupported').innerHTML = '&#x2714';
       }
 
-      // Attach Listeners
-      document.addEventListener('touchmove', function(e) {
-        if (e.cancelable) {
-            console.log('Touchmove: ' + e.timeStamp + ' - cancelable: ' + e.cancelable);
-          } else {
-            console.log('%cTouchmove: ' + e.timeStamp + ' - cancelable: ' + e.cancelable, 'color: red');
-          }
-      });
-      document.addEventListener('pointermove', function(e) {
-        console.log('Pointermove: ' + e.timeStamp);
-      });
-      document.addEventListener('pointercancel', function(e) {
-        console.log('%cPointercancel: ' + e.timeStamp, 'color:purple');
-      });
     </script>
   </body>
 </html>
