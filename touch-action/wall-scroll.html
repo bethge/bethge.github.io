@@ -47,12 +47,12 @@
       }
 
       document.addEventListener('touchmove', throttle(logTouchMove), {passive: true});
-      document.addEventListener('pointermove', function(e) {console.log('Pointermove: ' + parseInt(e.timeStamp)) + 'ms'});
+      document.addEventListener('pointermove', throttle(function(e) {console.log('Pointermove: ' + parseInt(e.timeStamp)) + 'ms'}));
       document.addEventListener('pointercancel', function(e) {console.log('%cPointercancel: ' + parseInt(e.timeStamp) + 'ms', 'color:purple')});
 
       // Throttle given function to execute once every 300ms.
-      var last = 0;
       function throttle(fn) {
+        var last = 0;
         return function(e) {
           var now = Date.now();
           if (now - last > 300) {
